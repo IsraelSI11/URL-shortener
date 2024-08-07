@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 var indexRouter = require('./routes/index');
-
+var bodyParser = require('body-parser')
 
 var app = express();
 
@@ -16,6 +16,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

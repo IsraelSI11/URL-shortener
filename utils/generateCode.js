@@ -9,23 +9,7 @@ const generateCode = async () => {
     for (let i = 0; i < 7; i++) {
         code += characters.charAt(Math.floor(Math.random() * characters.length))
     }
-    // Comprobar si el código ya existe en la base de datos
-    return db.connect().then(() => {
-        const collection = db.getCollection('urls')
-        const query = { code: code }
-        collection.findOne(query, (err, result) => {
-            if (err) throw err
-            if (result) {
-                db.close()
-                return generateCode();
-            } else {
-                db.close();
-                return code;
-            }
-        })
-    }).catch(err => {
-        throw err
-    })
+    return code;
 }
 
 module.exports = { generateCode };
