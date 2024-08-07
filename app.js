@@ -15,11 +15,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-const { MongoClient } = require('mongodb');
-const connectionURI = process.env.DATABASE_URL;
-const client = new MongoClient(connectionURI);
-await client.connect();
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
