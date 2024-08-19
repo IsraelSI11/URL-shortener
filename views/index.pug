@@ -1,17 +1,19 @@
 extends layout
 
 block content
-  .container.mx-auto.mt-10.p-5.bg-white.shadow-md.rounded-lg
+  .container.mx-auto.mt-10.p-5.bg-gray-300.shadow-md.rounded-lg.flex.flex-col.items-center
     h1.text-2xl.font-bold.mb-4 Acortador de URL
     p.mb-4 Bienvenido al acortador de URL. Ingresa la URL que deseas acortar.
 
-    form(action="/" method="POST" class="mb-4")
+    form(action="/" method="POST" class="mb-4 w-full max-w-md")
       .mb-4
         label(for="url" class="block text-gray-700 text-sm font-bold mb-2") URL:
         input#url(type="text" name="url" placeholder="https://example.com" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline")
-      button(type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline") Acortar
+      .container.flex.justify-center
+        button(type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline") Acortar
 
-    if code
-      p.text-green-500.font-semibold
-        | Tu URL acortada es: 
-        a.text-blue-500(href=`/${code}`) http://localhost:3000/#{code}
+  if code
+  .container.mx-auto.mt-6.p-5.bg-gray-200.shadow-md.rounded-lg.text-center.max-w-md
+    p.text-black.font-semibold.mb-2 Tu URL acortada es: 
+    a.text-blue-500.font-bold(href=`/${code}`) http://localhost:3000/#{code}
+

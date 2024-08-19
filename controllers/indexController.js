@@ -4,6 +4,11 @@ const { findCode, insertCode } = require('../models/urlModel.js');
 const postGenerateCode = async (req, res) => {
     try {
         let code = null;
+        const url = req.body.url;
+        if (!url) {
+            res.render('error', { message: 'Url no válida' });
+            return;
+        }
         do {
             code = await generateCode();
         } while (await findCode(code) != null);

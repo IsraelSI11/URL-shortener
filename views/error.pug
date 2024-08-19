@@ -1,6 +1,8 @@
 extends layout
 
 block content
-  .container.mx-auto.mt-10.p-5.bg-white.shadow-md.rounded-lg
-    h1.text-2xl.font-bold.mb-4 Error
-    p.text-red-500.font-semibold.mb-4= message
+  .container.mx-auto.mt-20.p-8.bg-white.shadow-lg.rounded-lg.max-w-lg.border.border-red-300
+    h1.text-3xl.font-bold.text-gray-800.mb-6.text-center Error
+    p.text-red-500.font-semibold.text-lg.mb-6.text-center= message
+    .flex.justify-center
+      a(href="/" class="text-blue-500 hover:text-blue-700 font-medium") Volver a la página principal
