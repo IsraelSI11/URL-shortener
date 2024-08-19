@@ -1,6 +1,6 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  .container.mx-auto.mt-10.p-5.bg-white.shadow-md.rounded-lg
+    h1.text-2xl.font-bold.mb-4 Error
+    p.text-red-500.font-semibold.mb-4= message
