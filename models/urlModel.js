@@ -1,32 +1,33 @@
-const db = require('../utils/db.js');
+const { client } = require('../utils/db.js');
 
 const findCode = async (code) => {
-    db.connect().then(() => {
-        const collection = db.getCollection('urls')
-        const query = { code: code }
-        collection.findOne(query, (err, result) => {
-            if (err) throw err
-            db.close()
-            return result
-        })
-    }).catch(err => {
-        throw err
-    })
+    try {
+        await client.connect();
+        const collection = client.db('url-shortener').collection('urls');
+        const query = { code: code };
+        const result = await collection.findOne(query);
+        return result;
+    } catch (err) {
+        console.error('Error finding code:', err);
+        throw err;
+    } finally {
+        await client.close();
+    }
 }
 
 const insertCode = async (code, url) => {
-    db.connect().then(() => {
-        const collection = db.getCollection('urls')
-        const query = { code: code, url: url }
-        collection.insertOne(query, (err, result) => {
-            if (err) throw err
-            db.close()
-            return result.insertedCount;
-        }
-        )
-    }).catch(err => {
-        throw err
-    });
+    try {
+        await client.connect();
+        const collection = client.db('url-shortener').collection('urls');
+        const query = { code: code, url: url };
+        const result = await collection.insertOne(query);
+        return result.insertedCount;
+    } catch (err) {
+        console.error('Error inserting code:', err);
+        throw err;
+    } finally {
+        await client.close();
+    }
 }
 
 module.exports = { findCode, insertCode };

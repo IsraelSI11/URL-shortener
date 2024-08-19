@@ -1,17 +1,16 @@
-const generateCode = require('../utils/generateCode.js');
-const findCode = require('../models/urlModel.js');
-const insertCode = require('../models/urlModel.js');
+const { generateCode } = require('../utils/generateCode.js');
+const { findCode, insertCode } = require('../models/urlModel.js');
 
 const postGenerateCode = async (req, res) => {
     try {
         let code = null;
         do {
-            code = generateCode();
+            code = await generateCode();
         } while (await findCode(code) != null);
-        const url = req.body.url;
         await insertCode(code, url);
-        res.render('index', { code: codigo });
+        res.render('index', { code: code });
     } catch (err) {
+        console.error(err);
         res.render('error', { message: 'Error al acortar la url' });
     }
 }
